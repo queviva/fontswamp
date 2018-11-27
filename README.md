@@ -1,2 +1,2 @@
 # fontswap
-one line javascript for custome changing font in a webpage
+one line javascript for custome changing fonts in a webpage
