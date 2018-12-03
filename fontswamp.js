@@ -94,7 +94,7 @@ document
                             .replace(
                                 
                                 // if 'http' appears ...
-                                /.*(\(http)/,
+                                /.*(\(https?:\/\/)/i,
                                 
 /* explaination of the regex 
 
@@ -102,7 +102,7 @@ document
             /.*(\(http)/
 
  /   => begins regex boundary
- .   => matches any character
+ .   => matches any character at all
  *   => matches any number of them
  (   => starts capturing the match in var '$1'
  \   => interprets the next char literally
@@ -111,8 +111,17 @@ document
  t   => matches the letter 't'
  t   => matches the letter 't' again
  p   => matches the letter 'p'
+ s   => matches 's' but only ...
+ ?   => zero or one of the previous 's'
+ :   => literally matches a colon
+ \   => interprets the next char literally
+ /   => literally the slansh character
+ \   => interprets the next char literally
+ /   => literally the slansh character again
  )   => stops capturing in the var '$1'
  /   => ends the regex boundary
+ i   => ignores upper/lower case in matching
+ 
 
 */
 
