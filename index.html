@@ -208,7 +208,7 @@ document
             // or ...
             ||
             
-            // for, the default, double clicks, and ...
+            // for, the default, double click, and ...
             'dblclick',
             
             // handle it with an anonymouse function ...
@@ -258,20 +258,20 @@ document
                                     // either the specified prompt, or ...
                                     obj.dataset.prompt ||
                                     
-                                    // this default phrase, and ...
+                                    // this default phrase ...
                                     'enter a font name or url'
                                     
-                                // closes the uri, then ...
-                                )+');'
+                                // ending the uri, then ...
+                                )
                             
-                            // closes the src value, but ...
-                            )
+                            // close the src value, but ...
+                            +');')
                         
-                            // replaces the protocol ...
+                            // replace the protocol ...
                             .replace(
                                 
                                 // if 'http' appears ...
-                                /.*(\(http)/,
+                                /.*(\(https?:\/\/)/i,
                                 
 /* explaination of the regex 
 
@@ -279,7 +279,7 @@ document
             /.*(\(http)/
 
  /   => begins regex boundary
- .   => matches any character
+ .   => matches any character at all
  *   => matches any number of them
  (   => starts capturing the match in var '$1'
  \   => interprets the next char literally
@@ -288,8 +288,17 @@ document
  t   => matches the letter 't'
  t   => matches the letter 't' again
  p   => matches the letter 'p'
+ s   => matches 's' but only ...
+ ?   => zero or one of the previous 's'
+ :   => literally matches a colon
+ \   => interprets the next char literally
+ /   => literally the slansh character
+ \   => interprets the next char literally
+ /   => literally the slansh character again
  )   => stops capturing in the var '$1'
  /   => ends the regex boundary
+ i   => ignores upper/lower case in matching
+ 
 
 */
 
@@ -297,29 +306,29 @@ document
                                 // with 'url' instead of 'local' ...
                                 'url' +
                                 
-                                // then re-appends the match ...
+                                // then re-append the match ...
                                 '$1'
                                 
-                            // and closes the replace ...
+                            // and close the replace ...
                             )
                             
-                    // closes the css selector ...
+                    // close the css selector ...
                     + '}',
                 
-                // appends it to the sheet ...
+                // append it to the sheet ...
                 obj.sheet.cssRules.length)
                 
-            // does NOT swallow errors, but ...
+            // do NOT swallow errors, but ...
             //}catch(T){}
             
-        // closes the listener, without capturing ...
+        // close the listener, without capturing ...
         //, false)
         )
         
-    // closes the querylist loop, and ...
+    // close the querylist loop, and ...
     )
 
-// closes the fontswamp objects loop    
+// close the fontswamp objects loop    
 );
 
 &lt;/script&gt;
