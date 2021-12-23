@@ -15,8 +15,8 @@
 }
 
 body {
-    padding: 0px;
-    margin: 0px;
+    padding: 0;
+    margin: 0;
     color: var(--main-color);
     background-color: var(--back-color);
     font-size: 22px;
@@ -27,12 +27,13 @@ body {
     hyphens: auto;
 }
 
-#holder {
+.holder {
 	position: relative;
 	background-color: var(--holder-back);
     margin: auto;
     width: 100%;
     max-width: 700px;
+    min-width: 325px;
 }
 
 a {
@@ -40,21 +41,18 @@ a {
     color: var(--main-color);
 }
 
+a:hover, a:visited {
+    color: #000;
+    transition: color linear var(--trans-speed);
+}
+
+
 .qa {
     border: 1px solid #000;
 }
 
 .qr {
     padding: 10px;
-}
-
-.qa, .qr {
-    transition: color linear var(--trans-speed);
-}
-
-.qa:hover, .qr:hover, a:hover, a:visited {
-    color: #000;
-    transition: color linear var(--trans-speed);
 }
 
 .qa:after {
@@ -88,59 +86,35 @@ pre {
     font-size:14px;
 }
 
-input[type=radio] {
-    
-    height: 30px;
-    width: 30px;
-    
-}
 
-.darth-fader.sfx {
-    --max-width: none;
-}
-
-#svg0 {
-    position:relative;
-    width:220px;
-    height:340;
-    overflow: visible;
-    border: 0px solid #ea0;
-}
-
-.swamper {
+[data-swamp] {
     font-family: swampfont;
 }
 
 .babel {
-    font-family: 'georgia'
+    font-family: babelfont;
+}
+
+ul {
+    font-family: babelfont;
 }
 
 /*possibly a portrait mobi-fone*/
 @media screen and (max-width:500px) {
-    .strong-disagree {
-        font-size: 12px;
-    }
+    
 	.qa > div:nth-child(1),
 	.qa > div:nth-child(2)
 	{
     	width: 100%;
     }
     
-    #svg0 {
-        width: 200px;
-    }
-    
 }
 
 /*possibly a mobile landscaper*/
-@media screen 
-    and (orientation: landscape) 
-    and (max-width: 760px) 
+@media screen
+    and (orientation: landscape)
+    and (max-width: 760px)
     {
-    
-    #svg0 {
-        width: 100px;
-    }
     
 }
 

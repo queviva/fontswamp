@@ -1,47 +1,71 @@
-<!doctype html>
-<html lang="en">
-<head><title>fontswap</title>
+<!doctype html><html lang="en">
+    
+<head><title>fontswamp</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<style
- class="fontswamp"
- data-querylist=".swamper, .babel"
->
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<style data-font='{"usectrl":true}'>
 @font-face {
     font-family: swampfont;
     src: url('https://fonts.gstatic.com/s/luckiestguy/v8/_gP_1RrxsjcxVyin9l9n_j2hTd52.woff2');
 }
 </style>
+<style data-font='{"event":"click","querylist":".babel"}'>
+@font-face {
+    font-family: babelfont;
+    src: local('arial'):
+}
+</style>
 <link id="demoStyles" rel="stylesheet" type="text/css" href="demoStyles.css">
 </head>
+
 <body>
-<div id="holder">
-    <div class="qr swamper" style="text-align:center;font-size:35px;">
+<div class="holder">
+    <div data-swamp class="qr" style="text-align:center;font-size:35px;">
         Welcome to the Font Swamp
     </div>
     <div class="qr babel">
-        Double click and see  <i>a single line</i>
+        Click this sentence to see  <i>a single line</i>
         of javascript that allows users to change
-        page fonts to any font name, or url, they specify. 
+        fonts in a page to any font name, or url, they specify;
+        try double-clicking with the control-key pressed to
+        change to large title above.
     </div>
     <div class="qr">
-        Here's some font urls, if you want to try that out:
+        Here's some font urls, to cut-and-paste
+        if you want to try that out:
         <br>
         <b style="font-size:10px;">
-            https://fonts.gstatic.com/s/luckiestguy/v8/_gP_1RrxsjcxVyin9l9n_j2hTd52.woff2
-            <br>
             https://fonts.gstatic.com/s/tangerine/v9/IurY6Y5j_oScZZow4VOxCZZM.woff2
+            <br>
+            https://fonts.gstatic.com/s/luckiestguy/v8/_gP_1RrxsjcxVyin9l9n_j2hTd52.woff2
         </b>
     </div>
     <div class="qr">
+        Here are some names of fonts that <i>might</i>
+        be installed locally on your computer if you
+        want to try typing those in:
+        <ul>
+            <li>georgia</li>
+            <li>arial black</li>
+            <li>verdana</li>
+            <li>tahoma</li>
+            <li>webdings</li>
+            <li>tinos</li>
+            <li>trebuchet ms</li>
+            <li>cousine</li>
+        </ul>
+    </div>
+    <div class="qr">
         Include the fontswamp.js script, then create
-        individual style tags for all the fonts you 
-        want to swamp.
+        individual style tags for all the fonts you
+        want to swamp, putting a <i>data-font</i>
+        parameter inside the style tag.
         <br><br>
-        Here's a sample of the default tag
+        Here's a sample of a default usage:
     </div>
     <div class="qr">
 <pre><code>
-&lt;style class="fontswamp"&gt;
+&lt;style data-font&gt;
 @font-face {
     font-family: mainPageFont;
     src: local('georgia');
@@ -52,36 +76,34 @@
 </code></pre>
     </div>
     <div class="qr">
-        By default, double clicking on any 
-        page element with the class <i>swamper</i>,
-        will launch a prompt, and overwrite the 
-        src of the font-face @rule in the fontswamp 
-        style tag.
+        By default, double clicking on any
+        page element with a <i>data-swamp</i> parameter
+        will launch a prompt, and overwrite the
+        src of the font-face @rule in the style tag.
     </div>
     <div class="qr">
-        There can be several fontswamp style tags 
-        in a page, each with parameters specifying 
+        There can be several fontswamp style tags
+        in a page, each with parameters specifying
         different options and behaviors.  This code
     </div>
     <div class="qr">
 <pre><code>
-&lt;style
- class="fontswamp"
- data-prompt="whachu fontin' about?!"
- data-event="click"
- data-usectrl="true"
- data-querylist=".someClass, .someOtherClass"
-&gt;
+&lt;style data-font='{
+ "prompt" : "whachu fontin' about?!",
+ "event" : "click",
+ "usectrl" : true,
+ "querylist" : ".someClass, .someOtherClass"
+}'&gt;
 @font-face {
     font-family: mainPageFont;
     src: local('georgia');
 }
 &lt;/style&gt;
-&lt;style
- class="fontswamp"
- data-usectrl="true"
- data-querylist=".header, .footer"
-&gt;
+
+&lt;style data-font='{
+ "usectrl" : true,
+ "querylist" : ".header, [data-footer]"
+}'&gt;
 @font-face {
     font-family: headFootFont;
     src: local('arial');
@@ -92,8 +114,8 @@
     </div>
     <div class="qr">
         customizes the behavior so that the prompt will
-        say "whachu fontin' about?", when you only single 
-        click, but are pressing the control key, 
+        say "whachu fontin' about?", when you only single
+        click, but are pressing the control key,
         on any page element with either the class
         "someClass" or "someOtherClass"
         <br><br>
@@ -103,245 +125,32 @@
     <div class="qr">
         Then, it creates another fontswamp that uses
         the default "enter a font name or url" prompt,
-        when a default double click happens, while the 
-        control key is pressed, on any page elements 
-        with the class "header" or "footer"
+        when a default double click happens, while the
+        control key is pressed, on any page elements
+        with the class "header" or a data-footer parameter.
         <br><br>
-        Any css tag with <i>headFootFont</i> in its 
-        font-family will get changed.
+        Any css tag with <i>headFootFont</i> in its
+        font-family will get changed. Anywhere at all,
+        actually, that the <i>headFootFont</i> family
+        is mentioned will get changed.
+    </div>
+    
+    <div class="qr">
+        There's also a <a href="min.js">minified version</a>
+        which is not just minified but edited to be smaller.
     </div>
     <hr>
-    <div class="qr">
-        Here's the four hundred and fifty three characters
-        that make up the one line of code.
-    </div>
-    <div class="qr">
-<pre><code>
- document.querySelectorAll('style.fontswamp').forEach(a=>document.querySelectorAll(a.dataset.querylist||'.swamper').forEach(b=>b.addEventListener(a.dataset.event||'dblclick',c=>('true'==a.dataset.usectrl?c.ctrlKey:!c.ctrlKey)&&a.sheet.insertRule('@font-face {font-family:'+a.sheet.cssRules[0].style.fontFamily+';src:'+('local('+prompt(a.dataset.prompt||'enter a font name or url')+');').replace(/.*(\(http)/,'url$1')+'}',a.sheet.cssRules.length))));
 
-</code></pre>
-    </div>
-    <div class="qr">
-        Let's break that up a little bit
-    </div>
-    <div class="qr">
-<pre><code>
-// loop through all the fontswamp style tags
-document.querySelectorAll('style.fontswamp').forEach(a=>
-
-    // loop through all the named classes, or default 'swamper' class
-    document.querySelectorAll(a.dataset.querylist||'.swamper').forEach(b=>
-    
-        // add a listener for the named event, or default double click
-        b.addEventListener(a.dataset.event||'dblclick',
-        
-            // check if control key has been required or not
-            c=>('true'==a.dataset.usectrl?c.ctrlKey:!c.ctrlKey)&&
-            
-                // create a replacement font-face rule
-                a.sheet.insertRule(
-                
-                    // overwrite the existing family name
-                    '@font-face {font-family:'+a.sheet.cssRules[0].style.fontFamily+
-                    
-                    // make the source a 'local' uri
-                    ';src:'+('local('+
-                    
-                        // ask for a font name using given, or default, wording
-                        prompt(a.dataset.prompt||'enter a font name or url')+');')
-                        
-                        // change the protocol if the font is a url
-                        .replace(/.*(\(http)/,'url$1')+'}',
-                        
-                // append that rule to the sheet
-                a.sheet.cssRules.length
-                
-            )
-        )
-    )
-); // prove its one line, with a semi-colon
-
-</code></pre>
-    </div>
-    <div class="qr">
-        Let's break that up <i>a lot</i> bit
-    </div>
-    <div class="qr">
-<pre><code>
-&lt;!-- make style tags with the fontswamp class--&gt;
-&lt;style class="fontswamp"&gt;
-@font-face {
-    font-family: mainFont; 
-    src: local('courier'); /*this initial src will get swamped*/
-}
-&lt;/style&gt;
-&lt;script&gt;
-
-// on load, ask the document ...
-document
-
-    // to select all style tags with the class 'fontswamp'
-    .querySelectorAll('style.fontswamp')
-    
-    // and loop through each of those tags, to ...
-    .forEach(obj => 
-    
-    // select all the other objects that are ...
-    document.querySelectorAll(
-        
-        // designated in 'fontswamp' data-querylists ...
-        obj.dataset.querylist
-        
-        // or ...
-        ||
-        
-        // that have the default 'swamper' class, then ...
-        '.swamper'
-        
-    // loop through all of those items, and ...
-    ).forEach(q => 
-        
-        // add a listener ...
-        q.addEventListener(
-            
-            // for either the specified event ...
-            obj.dataset.event
-            
-            // or ...
-            ||
-            
-            // for, the default, double click, and ...
-            'dblclick',
-            
-            // handle it with an anonymouse function ...
-            e => 
-            
-                // that ...
-                (
-                    // if control key is needed ...
-                    obj.dataset.usectrl == 'true' ?
-                    
-                    // checks the ctrl-pressed ...
-                    e.ctrlKey 
-                    
-                    // otherwise ...
-                    :
-                    
-                    // reverse-falses the ctrl-pressed ...
-                    !e.ctrlKey 
-                    
-                // to return a function that ...
-                ) && 
-                
-            // does NOT try [so errors get thrown] to ...
-            //try{
-                    
-                // insert a rule, in to the sheet, that is ...
-                obj.sheet.insertRule(
-                
-                    // a css font-face @rule, with ...
-                    '@font-face {' +
-                
-                        // the family name set to, ...
-                        'font-family:' +
-                            
-                            // the given name [throws if invalid] and ...
-                            (obj.sheet.cssRules[0].style.fontFamily) + ';' +
-                    
-                        // a source set to ...
-                        'src:' + 
-                    
-                            // a 'local' uri that ...
-                            ('local(' +
-                        
-                                // asks the user for a font, using ...
-                                prompt(
-                                    
-                                    // either the specified prompt, or ...
-                                    obj.dataset.prompt ||
-                                    
-                                    // this default phrase ...
-                                    'enter a font name or url'
-                                    
-                                // ending the uri, then ...
-                                )
-                            
-                            // close the src value, but ...
-                            +');')
-                        
-                            // replace the protocol ...
-                            .replace(
-                                
-                                // if 'http' appears ...
-                                /.*(\(https?:\/\/)/i,
-                                
-/* explaination of the regex 
-
-            /.*(\(https?:\/\/)/i
-
- /   => begins regex boundary
- .   => matches any character at all
- *   => matches any number of them
- (   => starts capturing the match in var '$1'
- \   => interprets the next char literally
- (   => matches the actual parenthesis character 
- h   => matches the letter 'h'
- t   => matches the letter 't'
- t   => matches the letter 't' again
- p   => matches the letter 'p'
- s   => matches 's' but only ...
- ?   => zero or one of the previous 's'
- :   => literally matches a colon
- \   => interprets the next char literally
- /   => literally the slansh character
- \   => interprets the next char literally
- /   => literally the slansh character again
- )   => stops capturing in the var '$1'
- /   => ends the regex boundary
- i   => ignores upper/lower case in matching
- 
-
-*/
-
-                                
-                                // with 'url' instead of 'local' ...
-                                'url' +
-                                
-                                // then re-append the match ...
-                                '$1'
-                                
-                            // and close the replace ...
-                            )
-                            
-                    // close the css selector ...
-                    + '}',
-                
-                // append it to the sheet ...
-                obj.sheet.cssRules.length)
-                
-            // do NOT swallow errors, but ...
-            //}catch(T){}
-            
-        // close the listener, without capturing ...
-        //, false)
-        )
-        
-    // close the querylist loop, and ...
-    )
-
-// close the fontswamp objects loop    
-);
-
-&lt;/script&gt;
-
-</code></pre>
-    </div>
-
-    
-    <div id="sig" class="qr" style="height:100px;text-align:right;font-family:swampfont">
+    <div id="sig" class="qr" style="
+        height:100px;
+        text-align:right;
+        font-family:swampfont;
+    ">
         ~queviva
     </div>
 </div>
 </body>
+
 <script src="fontswamp.js"></script>
+
 </html>
